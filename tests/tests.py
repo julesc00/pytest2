@@ -6,10 +6,11 @@ from pathlib import Path
 
 
 class ListingTest(object):
+
     @staticmethod
     def test_list_empty_dir():
         """Test -ls in an empty folder, then rm dir."""
-        fldr_path = "/Users/julio_briones/Documents/Dev/Python/Core/pytest2/test_folder"
+        fldr_path = "/tmp/test_folder"
         try:
             os.mkdir(fldr_path)
             result = subprocess.run(["ls", fldr_path], stdout=subprocess.PIPE)
@@ -21,12 +22,12 @@ class ListingTest(object):
     @staticmethod
     def test_simple_ls():
         """Test -ls, with file exists."""
-        fldr_path = "/Users/julio_briones/Documents/Dev/Python/Core/pytest2/test_folder"
+        fldr_path = "/tmp/test_folder"
         try:
-            file_path = "/Users/julio_briones/Documents/Dev/Python/Core/pytest2/test_folder/first.txt"
+            file1 = "/first.txt"
             os.mkdir(fldr_path)
-            Path(file_path).touch()
-            result = subprocess.run(["ls", file_path], stdout=subprocess.PIPE)
+            Path(fldr_path + file1).touch()
+            result = subprocess.run(["ls", fldr_path], stdout=subprocess.PIPE)
             print(f"Result: [{result}]")
 
             assert "first.txt" in str(result.stdout), "Listing a dir with one file didn't return expected results."
@@ -36,7 +37,7 @@ class ListingTest(object):
     @staticmethod
     def test_ls_multiple_files():
         """Test ls with multiple files exists."""
-        fldr_path = "/Users/julio_briones/Documents/Dev/Python/Core/pytest2/test_folder"
+        fldr_path = "/tmp/test_folder"
         try:
             file1 = "/first.txt"
             file2 = "/second.doc"
@@ -54,7 +55,7 @@ class ListingTest(object):
     @staticmethod
     def test_not_ls_a_hidden_file():
         """Test not listing for a hidden file."""
-        fldr_path = "/Users/julio_briones/Documents/Dev/Python/Core/pytest2/test_folder"
+        fldr_path = "/tmp/test_folder"
         try:
             file1 = "/first.txt"
             hidden_file = "/.hidden.txt"
@@ -73,7 +74,7 @@ class ListingTest(object):
     @staticmethod
     def test_ls_a_hidden_file():
         """Test listing for a hidden file."""
-        fldr_path = "/Users/julio_briones/Documents/Dev/Python/Core/pytest2/test_folder"
+        fldr_path = "/tmp/test_folder"
         try:
             file1 = "/first.txt"
             hidden_file = "/.hidden.txt"
