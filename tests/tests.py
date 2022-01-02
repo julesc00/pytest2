@@ -25,6 +25,7 @@ def test_simple_ls():
         os.mkdir(fldr_path)
         Path(file_path).touch()
         result = subprocess.run(["ls", file_path], stdout=subprocess.PIPE)
+        print(f"Result: [{result}]")
 
         assert "first.txt" in str(result.stdout), "Listing a dir with one file didn't return expected results."
     finally:
