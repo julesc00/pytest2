@@ -88,3 +88,8 @@ class ListingTest(object):
             assert ".hidden.txt" in str(result.stdout), "ls a hidden file when it shouldn't have any."
         finally:
             shutil.rmtree(fldr_path, ignore_errors=True)
+
+    @staticmethod
+    def test_ls_windows_os():
+        pass
+
